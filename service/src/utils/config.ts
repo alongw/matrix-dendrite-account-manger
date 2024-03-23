@@ -22,7 +22,8 @@ const defaultConfig = {
     matrix: {
         base_url: 'https://matrix.gov.cn',
         registration_shared_secret: '114514',
-        access_token: '1919810'
+        access_token: '1919810',
+        server_name: 'gov.cn'
     },
     nya_account: {
         appid: 'appid',

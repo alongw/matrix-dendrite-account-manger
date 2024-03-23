@@ -71,7 +71,7 @@ onMounted(() => {
         <!-- 设置密码和昵称 -->
         <div v-if="step === 1">
             <a-typography-paragraph>
-                请设置您的密码和昵称，密码请自觉符合安全要求，否则可能会导致申请不通过
+                请设置您的密码和昵称，密码请自觉符合安全要求（不少于8位），否则可能会导致申请不通过
             </a-typography-paragraph>
             <a-typography-paragraph> 显示昵称和密码注册后可修改 </a-typography-paragraph>
             <a-button @click="step--"> 上一步 </a-button>

@@ -117,7 +117,7 @@ router.post(
                 where: {
                     code: req.body.inviteCode,
                     used: {
-                        [Op.or]: [false, null, undefined]
+                        [Op.or]: [false, null]
                     },
                     expire: {
                         [Op.gte]: dayjs().valueOf()

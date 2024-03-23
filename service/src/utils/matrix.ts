@@ -67,7 +67,7 @@ export const updatePassword = async (
 
     try {
         const { data: result } = await axios.post(
-            `${config.matrix.base_url}/_dendrite/admin/resetPassword/@${userId}:nekos.chat`,
+            `${config.matrix.base_url}/_dendrite/admin/resetPassword/@${userId}:${config.matrix.server_name}`,
             {
                 password: pwd,
                 logout_devices: loginout === true
@@ -79,7 +79,7 @@ export const updatePassword = async (
             }
         )
 
-        if (!result.success) {
+        if (!result.password_updated) {
             return false
         }
 

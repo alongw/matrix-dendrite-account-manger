@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ref } from 'vue'
 
 import dayjs from 'dayjs'
@@ -52,14 +53,21 @@ export const useApply = () => {
                 }
             })
         } else {
-            Modal.info({
-                title: '你的注册请求已经提交',
-                content:
-                    '我们已经收到你的注册申请，我们将会在7个工作日内完成对您账号的审核',
-                onOk: () => {
-                    window.localStorage.setItem('applyDate', dayjs().format('YYYY-MM-DD'))
-                    router.push('/finish')
-                }
+            // 中国模式
+            // Modal.info({
+            //     title: '你的注册请求已经提交',
+            //     content:
+            //         '我们已经收到你的注册申请，我们将会在7个工作日内完成对您账号的审核',
+            //     onOk: () => {
+            //         window.localStorage.setItem('applyDate', dayjs().format('YYYY-MM-DD'))
+            //         router.push('/finish')
+            //     }
+            // })
+
+            // 正常模式
+            Modal.error({
+                title: '注册失败',
+                content: msg
             })
         }
     }
