@@ -67,6 +67,10 @@ matrix:
     # Matrix server access token
     # https://matrix-org.github.io/dendrite/administration/adminapi
     access_token: '1919810'
+    
+    # Matrix server name
+    # It's the "gov.cn" in "@admin:gov.cn".
+    server_name: 'gov.cn'
 
 # Nya account configuration
 # https://account.lolinya.net/docs/quickly-start.html
