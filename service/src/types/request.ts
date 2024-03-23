@@ -9,6 +9,7 @@ export interface User {
     uid: string
     name: string
     avatar: string
+    group: number
 }
 
 export interface Request<

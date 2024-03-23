@@ -6,7 +6,7 @@ import logger from '@/utils/log'
 
 import db from '@/utils/db'
 
-import type { UserTable, InvitationCodeTable } from '@/types/database'
+import type { UserTable, InvitationCodeTable, LoginStateTable } from '@/types/database'
 
 export const User = db.define<Model<UserTable>>('user', {
     uid: {
@@ -58,12 +58,51 @@ export const InvitationCode = db.define<Model<InvitationCodeTable>>('invitation_
     }
 })
 
+export const LoginState = db.define<Model<LoginStateTable>>('login_state', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    state: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        defaultValue: DataTypes.UUIDV4
+    },
+    method: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: 'login'
+    },
+    expire: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    used: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    used_by: {
+        type: DataTypes.STRING
+    }
+})
+
 User.hasMany(InvitationCode, {
     foreignKey: 'creator',
     sourceKey: 'uid'
 })
 InvitationCode.belongsTo(User, {
     foreignKey: 'creator',
+    targetKey: 'uid'
+})
+
+User.hasMany(LoginState, {
+    foreignKey: 'used_by',
+    sourceKey: 'uid'
+})
+
+LoginState.belongsTo(User, {
+    foreignKey: 'used_by',
     targetKey: 'uid'
 })
 

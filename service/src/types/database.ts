@@ -14,3 +14,12 @@ export interface InvitationCodeTable {
     used: boolean
     used_by: string
 }
+
+export interface LoginStateTable {
+    id: number
+    state: string
+    method: string
+    expire: number
+    used: boolean
+    used_by: string
+}
