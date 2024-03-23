@@ -62,7 +62,7 @@ onMounted(async () => {
                 <a-button
                     v-if="userInfo && userInfo.uid"
                     type="link"
-                    @click="$router.push('/logout')"
+                    @click="$router.push('/loginout')"
                 >
                     退出登录
                 </a-button>
