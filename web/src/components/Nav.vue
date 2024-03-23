@@ -7,7 +7,9 @@ defineOptions({
 <template>
     <div class="nav">
         <div class="item">
-            <div class="title">Neko's Home Account Manager</div>
+            <div class="title">
+                <p @click="$router.push('/user')">Neko's Home Account Manager</p>
+            </div>
         </div>
     </div>
 </template>
@@ -24,8 +26,13 @@ defineOptions({
         width: 100%;
         max-width: 1200px;
         .title {
-            font-size: 16px;
-            font-weight: bold;
+            p {
+                font-size: 16px;
+                font-weight: bold;
+                display: inline-block;
+                cursor: pointer;
+                margin-bottom: 0;
+            }
         }
     }
 }

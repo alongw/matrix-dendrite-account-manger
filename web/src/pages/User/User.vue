@@ -42,27 +42,43 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="title">
-        <a-skeleton :loading="!userInfo?.uid" active>
+    <a-skeleton :loading="!userInfo?.uid" active>
+        <div class="title">
             <h2>您好，{{ userInfo?.name || '未命名' }}！</h2>
+            <a-space>
+                <a-button
+                    v-if="userInfo && userInfo?.group >= 10"
+                    type="link"
+                    @click="$router.push('/admin')"
+                >
+                    管理后台
+                </a-button>
+                <a-button
+                    v-if="userInfo && userInfo.uid"
+                    type="link"
+                    @click="$router.push('/logout')"
+                >
+                    退出登录
+                </a-button>
+            </a-space>
+        </div>
 
-            <a-card title="我的 Matrix 账号" class="my-account">
-                <template #extra>
-                    <a-button type="link" @click="fetch">刷新</a-button>
-                </template>
-                <div v-if="matrixAccount">
-                    <h3>你的 Matrix 账号：@{{ matrixAccount }}:nekos.chat</h3>
-                    <a-button type="primary" @click="open = !open">修改密码</a-button>
-                </div>
-                <div v-else>
-                    <h3>你还未有 Matrix 账号</h3>
-                    <a-button type="primary" @click="$router.push('/apply')">
-                        去申请
-                    </a-button>
-                </div>
-            </a-card>
-        </a-skeleton>
-    </div>
+        <a-card title="我的 Matrix 账号" class="my-account">
+            <template #extra>
+                <a-button type="link" @click="fetch">刷新</a-button>
+            </template>
+            <div v-if="matrixAccount">
+                <h3>你的 Matrix 账号：@{{ matrixAccount }}:nekos.chat</h3>
+                <a-button type="primary" @click="open = !open">修改密码</a-button>
+            </div>
+            <div v-else>
+                <h3>你还未有 Matrix 账号</h3>
+                <a-button type="primary" @click="$router.push('/apply')">
+                    去申请
+                </a-button>
+            </div>
+        </a-card>
+    </a-skeleton>
 
     <a-modal v-model:open="open" title="修改密码" @ok="handleEditPassword">
         <a-input v-model:value="pwdIpt" placeholder="请输入新密码" />
@@ -72,6 +88,12 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="less">
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .my-account {
     margin: 25px auto;
     width: 100%;
