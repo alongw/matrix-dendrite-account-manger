@@ -27,6 +27,11 @@ const router = createRouter({
             path: '/finish',
             name: 'Finish',
             component: () => import('@/pages/Finish/Finish.vue')
+        },
+        {
+            path: '/admin',
+            name: 'Admin',
+            component: () => import('@/pages/Admin/Admin.vue')
         }
     ]
 })

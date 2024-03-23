@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useUser } from '@/hooks/useUser'
 import { message } from 'ant-design-vue'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 
 defineOptions({
     name: 'UserPage'
 })
 
-const { getUserInfo, userInfo, getMatrixInfo, matrixAccount } = useUser()
+const { getUserInfo, userInfo, getMatrixInfo, matrixAccount, editPassword } = useUser()
 
 const fetch = async () => {
     userInfo.value && (userInfo.value.uid = '')
@@ -16,6 +16,22 @@ const fetch = async () => {
         return message.error('获取用户信息失败')
     }
     userInfo.value = result
+}
+
+const open = ref(false)
+
+const pwdIpt = ref('')
+const checked = ref(false)
+
+const handleEditPassword = async () => {
+    if (!pwdIpt.value) {
+        return message.error('请输入密码')
+    }
+    const result = await editPassword(pwdIpt.value, checked.value)
+    if (!result) {
+        return message.error('修改密码失败')
+    }
+    message.success('修改密码成功')
 }
 
 onMounted(async () => {
@@ -32,11 +48,11 @@ onMounted(async () => {
 
             <a-card title="我的 Matrix 账号" class="my-account">
                 <template #extra>
-                    <a-button type="link">刷新</a-button>
+                    <a-button type="link" @click="fetch">刷新</a-button>
                 </template>
                 <div v-if="matrixAccount">
                     <h3>你的 Matrix 账号：@{{ matrixAccount }}:nekos.chat</h3>
-                    <a-button type="primary">修改密码</a-button>
+                    <a-button type="primary" @click="open = !open">修改密码</a-button>
                 </div>
                 <div v-else>
                     <h3>你还未有 Matrix 账号</h3>
@@ -47,6 +63,12 @@ onMounted(async () => {
             </a-card>
         </a-skeleton>
     </div>
+
+    <a-modal v-model:open="open" title="修改密码" @ok="handleEditPassword">
+        <a-input v-model:value="pwdIpt" placeholder="请输入新密码" />
+        <a-checkbox v-model:checked="checked">在所有设备上退出登录</a-checkbox>
+        <p>（同时吊销所有访问令牌，可能会导致加密信息丢失，请谨慎选择）</p>
+    </a-modal>
 </template>
 
 <style scoped lang="less">

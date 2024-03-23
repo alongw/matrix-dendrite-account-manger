@@ -1,8 +1,12 @@
 import { Router } from 'express'
 
+import { User } from '@/database/table'
+
 import { checkValue } from '@/utils/common'
 
 import { Request } from '@/types/request'
+
+import { updatePassword } from '@/utils/matrix'
 
 const router = Router()
 
@@ -12,6 +16,7 @@ router.post(
     async (
         req: Request<{
             password: string
+            loginout: boolean
         }>,
         res
     ) => {
@@ -22,9 +27,29 @@ router.post(
             })
         }
 
-        try {
-            // TODO: 修改密码
-        } catch (error) {}
+        const user = await User.findOne({
+            where: {
+                uid: req.auth.uid
+            }
+        })
+
+        const result = await updatePassword(
+            req.body.password,
+            user.toJSON().matrix_user_id,
+            req.body.loginout
+        )
+
+        if (!result) {
+            return res.send({
+                status: 500,
+                msg: '修改失败'
+            })
+        }
+
+        return res.send({
+            status: 200,
+            msg: '修改成功'
+        })
     }
 )
 

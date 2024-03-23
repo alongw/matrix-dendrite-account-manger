@@ -52,6 +52,6 @@ export const registerMatrix = (data: {
     return axios.post<Response>('/user/register', data)
 }
 
-export const updatePassword = (data: { password: string }) => {
+export const updatePassword = (data: { password: string; loginout: boolean }) => {
     return axios.post<Response>('/user/password', data)
 }

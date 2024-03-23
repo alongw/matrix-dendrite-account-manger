@@ -55,3 +55,36 @@ export const register = async (user: {
         return false
     }
 }
+
+export const updatePassword = async (
+    pwd: string,
+    userId: string,
+    loginout: boolean = false
+) => {
+    if (!checkValue(userId, loginout)) {
+        return false
+    }
+
+    try {
+        const { data: result } = await axios.post(
+            `${config.matrix.base_url}/_dendrite/admin/resetPassword/@${userId}:nekos.chat`,
+            {
+                password: pwd,
+                logout_devices: loginout === true
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${config.matrix.access_token}`
+                }
+            }
+        )
+
+        if (!result.success) {
+            return false
+        }
+
+        return true
+    } catch (error) {
+        return false
+    }
+}

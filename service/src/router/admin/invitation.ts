@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import { InvitationCode } from '@/database/table'
-import dayjs from 'dayjs'
 
 import { checkValue } from '@/utils/common'
 
@@ -44,7 +43,8 @@ router.post(
             // 创建邀请码
             const result = await InvitationCode.bulkCreate(
                 Array.from({ length: number }).map(() => ({
-                    expire: req.body.expire
+                    expire: req.body.expire,
+                    creator: req.auth.uid
                 }))
             )
             return res.send({

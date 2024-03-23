@@ -43,7 +43,7 @@ onMounted(() => {
                     {
                         title: '提交审核',
                         description: '您已提交注册申请',
-                        subTitle: dayjs(date).format('YYYY-MM-DD HH:mm:ss')
+                        subTitle: dayjs(date).format('YYYY-MM-DD')
                     },
                     {
                         title: '审核中',
