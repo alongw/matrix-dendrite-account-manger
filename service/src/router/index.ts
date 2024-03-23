@@ -11,6 +11,10 @@ router.use('/public', async (req, res, next) =>
     (await import('./public/index')).default(req, res, next)
 )
 
+router.use('/user', async (req, res, next) =>
+    (await import('./user/index')).default(req, res, next)
+)
+
 router.use('/admin', async (req: Request, res, next) => {
     if (req.auth?.group < 10) {
         return res.send({
