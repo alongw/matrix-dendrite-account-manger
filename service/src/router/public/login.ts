@@ -76,6 +76,27 @@ router.post('/', async (req, res) => {
         })
     }
 
+    // 创建用户
+    try {
+        const result = await User.findOrCreate({
+            where: {
+                uid: userInfo.uid
+            },
+            defaults: {
+                uid: userInfo.uid,
+                name: userInfo.nickname,
+                avatar: userInfo.avatar,
+                group: 1
+            }
+        })
+    } catch (error) {
+        logger.error(`创建用户失败 ${error}`)
+        return res.send({
+            status: 500,
+            msg: '初始化用户信息失败'
+        })
+    }
+
     // 更新 state
     try {
         await LoginState.update(
@@ -97,27 +118,19 @@ router.post('/', async (req, res) => {
         })
     }
 
-    // 创建用户
+    // 生成 token
     try {
-        const result = await User.findOrCreate({
+        const result = await User.findOne({
             where: {
                 uid: userInfo.uid
-            },
-            defaults: {
-                uid: userInfo.uid,
-                name: userInfo.nickname,
-                avatar: userInfo.avatar,
-                group: 1
             }
         })
-
-        // 生成 token
         const token = createToken(
             {
                 uid: userInfo.uid,
                 name: userInfo.nickname,
                 avatar: userInfo.avatar,
-                group: result[0].toJSON().group
+                group: result.toJSON().group
             },
             60 * 60 * 6
         )
@@ -130,10 +143,10 @@ router.post('/', async (req, res) => {
             }
         })
     } catch (error) {
-        logger.error(`创建用户失败 ${error}`)
+        logger.error(`生成 token 失败 ${error}`)
         return res.send({
             status: 500,
-            msg: '初始化用户信息失败'
+            msg: '生成 token 失败'
         })
     }
 })
