@@ -109,7 +109,7 @@ LoginState.belongsTo(User, {
 if (config.db.sync === true) {
     logger.info('开始同步数据库，如果您不需要，请在配置文件中禁用')
     try {
-        await db.sync({ alter: true })
+        await db.sync({ alter: true, force: true })
         logger.info('数据库同步成功')
     } catch (error) {
         logger.error('数据库同步失败')

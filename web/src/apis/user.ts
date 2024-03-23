@@ -36,7 +36,11 @@ export const getMatrixInfo = () => {
 }
 
 export const checkMatrixName = (data: { username: string }) => {
-    return axios.post<Response>('/user/register/checkName', data)
+    return axios.post<
+        Response<{
+            ability: boolean
+        }>
+    >('/user/register/checkName', data)
 }
 
 export const registerMatrix = (data: {

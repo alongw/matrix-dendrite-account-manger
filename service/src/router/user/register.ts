@@ -62,13 +62,19 @@ router.post('/checkName', async (req: Request<{ username: string }>, res) => {
         if (result) {
             return res.send({
                 status: 403,
-                msg: '用户名已被占用'
+                msg: '用户名已被占用',
+                data: {
+                    ability: false
+                }
             })
         }
 
         return res.send({
             status: 200,
-            msg: '用户名可用'
+            msg: '用户名可用',
+            data: {
+                ability: true
+            }
         })
     } catch (error) {
         return res.send({

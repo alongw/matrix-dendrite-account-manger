@@ -40,7 +40,9 @@ onMounted(async () => {
                 </div>
                 <div v-else>
                     <h3>你还未有 Matrix 账号</h3>
-                    <a-button type="primary">去申请</a-button>
+                    <a-button type="primary" @click="$router.push('/apply')">
+                        去申请
+                    </a-button>
                 </div>
             </a-card>
         </a-skeleton>
