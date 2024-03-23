@@ -64,12 +64,12 @@ app.use(
     }
 )
 
-// app.use(config.baseUrl, async (req, res, next) =>
-//     (await import('@/router/index')).default(req, res, next)
-// )
+app.use(config.api.base_url, async (req, res, next) =>
+    (await import('@/router/index')).default(req, res, next)
+)
 
 app.listen(config.listen_port, async () => {
-    // await import('@/database/table')
+    await import('@/database/table')
     logger.info(
         `matrix-dendrite-account-manger 服务器正在端口 ${config.listen_port} 上运行`
     )

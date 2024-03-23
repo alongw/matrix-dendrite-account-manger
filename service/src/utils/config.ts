@@ -10,6 +10,7 @@ const defaultConfig = {
     },
     db: {
         type: 'sqlite',
+        sync: true,
         mysql: {
             host: 'localhost',
             port: 3306,
@@ -22,6 +23,11 @@ const defaultConfig = {
         base_url: 'https://matrix.gov.cn',
         registration_shared_secret: '114514',
         access_token: '1919810'
+    },
+    nya_account: {
+        appid: 'appid',
+        appsecret: 'admin123',
+        redirectUrl: 'https://www.gov.cn/'
     }
 }
 

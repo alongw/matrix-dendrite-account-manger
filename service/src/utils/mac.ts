@@ -1,11 +1,13 @@
 import crypto from 'crypto'
 
+import config from './config'
+
 export const generateMAC = (
     nonce: string,
     user: string,
     password: string,
-    isAdmin: boolean,
-    sharedSecret: string
+    isAdmin: boolean = false,
+    sharedSecret: string = config.matrix.registration_shared_secret
 ) => {
     const hmac = crypto.createHmac('sha1', sharedSecret)
 
