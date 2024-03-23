@@ -9,7 +9,7 @@ router.get('/', (req: Request, res) => {
         status: 200,
         msg: '获取用户信息成功',
         data: {
-            userInfo: req.auth
+            ...req.auth
         }
     })
 })

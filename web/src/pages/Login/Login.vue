@@ -9,6 +9,8 @@ defineOptions({
     name: 'LoginPage'
 })
 
+const appid = import.meta.env.VITE_NYA_ACCOUNT_APPID
+
 const route = useRoute()
 const router = useRouter()
 
@@ -22,7 +24,7 @@ const handleReLogin = async () => {
         return message.error('无法获取 state ，请稍后再试')
     }
     // 重定向
-    window.location.href = `https://account.lolinya.net/authorize?state=${state}&client_id=01b35859-850b-454c-9256-3f036ab217ae`
+    window.location.href = `https://account.lolinya.net/authorize?state=${state}&client_id=${appid}`
 }
 
 onMounted(async () => {
@@ -56,6 +58,6 @@ onMounted(async () => {
     <h1>请稍后...</h1>
     <h2>{{ showStatusTitle }}</h2>
     <a-button v-if="showReLoginButton" type="primary" @click="handleReLogin">
-        重新登录
+        重新授权
     </a-button>
 </template>
