@@ -5,6 +5,8 @@ export interface Invitation {
     creator: string
     used: boolean
     used_by: string
-    createdAt: string
-    updatedAt: string
+
+    // sequelize sqlite bug
+    // createdAt: string
+    // updatedAt: string
 }

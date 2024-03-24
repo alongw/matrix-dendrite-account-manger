@@ -42,24 +42,24 @@ const columns = [
         }
     },
 
-    {
-        dataIndex: 'updatedAt',
-        title: '使用时间（更新时间）',
-        customRender: ({ text }: { text: string }) => {
-            return text ? dayjs(text).format('YYYY-MM-DD HH:mm:ss') : '/'
-        }
-    },
+    // {
+    //     dataIndex: 'updatedAt',
+    //     title: '使用时间（更新时间）',
+    //     customRender: ({ text }: { text: string }) => {
+    //         return text ? dayjs(text).format('YYYY-MM-DD HH:mm:ss') : '/'
+    //     }
+    // },
     {
         dataIndex: 'creator',
         title: '创建者'
-    },
-    {
-        dataIndex: 'createdAt',
-        title: '创建时间',
-        customRender: ({ text }: { text: string }) => {
-            return dayjs(text).format('YYYY-MM-DD HH:mm:ss')
-        }
     }
+    // {
+    //     dataIndex: 'createdAt',
+    //     title: '创建时间',
+    //     customRender: ({ text }: { text: string }) => {
+    //         return dayjs(text).format('YYYY-MM-DD HH:mm:ss')
+    //     }
+    // }
 ]
 
 const numIpt = ref('')
