@@ -32,6 +32,11 @@ const router = createRouter({
             path: '/admin',
             name: 'Admin',
             component: () => import('@/pages/Admin/Admin.vue')
+        },
+        {
+            path: '/loginout',
+            name: 'Loginout',
+            component: () => import('@/pages/Loginout/Loginout.vue')
         }
     ]
 })
