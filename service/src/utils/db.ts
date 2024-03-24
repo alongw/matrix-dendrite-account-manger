@@ -8,7 +8,10 @@ if (config.db.type === 'sqlite') {
     sequelize = new Sequelize({
         dialect: 'sqlite',
         storage: './data/database.db',
-        logging: (msg) => dbLogger.debug.bind(msg)
+        logging: (msg) => dbLogger.debug.bind(msg),
+        define: {
+            timestamps: false // 禁用所有模型的 timestamps
+        }
     })
 } else {
     const db = config.db.mysql
