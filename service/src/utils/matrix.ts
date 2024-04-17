@@ -47,11 +47,13 @@ export const register = async (user: {
         )
 
         if (!result.user_id) {
+            console.log(result)
             return false
         }
 
         return true
     } catch (error) {
+        console.log(error)
         return false
     }
 }
