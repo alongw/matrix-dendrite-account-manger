@@ -34,8 +34,8 @@ jobs:
                   yarn
                   yarn build
                   cd ./dist
-                  echo "{"m.homeserver":{"base_url":"${{secrets.HOME_SERVER}}"}}" > client.json
-                  echo "{"m.server":"${{secrets.HOME_SERVER}}"}}"}" > server.json
+                  echo "{\"m.homeserver\":{\"base_url\":\"${{secrets.HOME_SERVER}}\"}}" > client.json
+                  echo "{\"m.server\":\"${{secrets.HOME_SERVER}}\"}}\"}" > server.json
                   cd ../..
 
             - name: upload service
