@@ -9,6 +9,9 @@ jobs:
     build:
         runs-on: ubuntu-latest
 
+        env:
+            HOME_SERVER: ${{ secrets.HOME_SERVER }}
+
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
@@ -30,7 +33,10 @@ jobs:
                   cd ./web
                   yarn
                   yarn build
-                  cd ..
+                  cd ./dist
+                  echo "{"m.homeserver":{"base_url":"${{secrets.HOME_SERVER}}"}}" > client.json
+                  echo "{"m.server":"${{secrets.HOME_SERVER}}"}}"}" > server.json
+                  cd ../..
 
             - name: upload service
               uses: actions/upload-artifact@v3
